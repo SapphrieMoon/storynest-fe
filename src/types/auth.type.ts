@@ -15,6 +15,7 @@ export interface LoginData {
   avatarUrl: string;
   planId: number;
   planName: string;
+  credits: number;
 }
 
 export interface LoginResponse {

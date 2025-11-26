@@ -1,4 +1,3 @@
-// components/layout/Header.tsx
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
@@ -17,18 +16,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getAvatarFromLocalStorage } from "@/lib/localStorage";
+import {
+  getAvatarFromLocalStorage,
+  getCreditsFromLocalStorage,
+} from "@/lib/localStorage";
 import { useAuth } from "@/context/AuthContext";
 import { useLogoutMutation } from "@/queries/auth.queries";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { NotificationComponent } from "./Notification";
+import ElectricBorder from "./ElectricBorder";
 
 export function Header() {
   const router = useRouter();
 
   const logoutMutation = useLogoutMutation();
   const { token, logout: authLogout } = useAuth();
+  const credits = getCreditsFromLocalStorage();
 
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -80,6 +84,14 @@ export function Header() {
       </Button> */}
 
       <div className="flex items-center gap-4">
+        {user && (
+          <div className="flex items-center gap-3 text-white text-sm font-medium">
+            <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow">
+              {credits} xu
+            </span>
+          </div>
+        )}
+
         {/* Notification Bell */}
         {token && <NotificationComponent />}
 
@@ -101,6 +113,11 @@ export function Header() {
               <DropdownMenuLabel className="text-white">
                 Tài khoản của tôi
               </DropdownMenuLabel>
+              <DropdownMenuItem className="p-0 bg-transparent focus:bg-transparent">
+                <ElectricBorder className="flex items-center gap-2 px-3 py-2 rounded-md text-xs font-semibold tracking-wide text-white/90 border-transparent">
+                  <span className="text-bloom">Gói Thịnh Vượng</span>
+                </ElectricBorder>
+              </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-white/10" />
               <DropdownMenuItem
                 onClick={() => router.push("/home/profile")}

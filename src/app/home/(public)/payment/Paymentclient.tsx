@@ -41,9 +41,9 @@ export default function PaymentCheckoutClient() {
   useEffect(() => {
     if (checkPayment?.status === 200) {
       toast.success("Thanh toán thành công");
-      router.push("/home");
+      router.push(`/home/invoice?orderCode=${orderCode}`);
     }
-  }, [checkPayment, router]);
+  }, [checkPayment, router, orderCode]);
 
   useEffect(() => {
     if (!checkout?.expiredAt) return;

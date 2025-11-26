@@ -39,10 +39,10 @@ export const removePlanNameFromLocalStorage = () => {
   isBrowser && localStorage.removeItem("planName");
 };
 
-export const getCreaditsFromLocalStorage = () =>
-  isBrowser ? localStorage.getItem("Creadits") : null;
-export const setCreaditsToLocalStorage = (planId: number) =>
-  isBrowser && localStorage.setItem("Creadits", planId.toString());
-export const removeCreaditsFromLocalStorage = () => {
-  isBrowser && localStorage.removeItem("Creadits");
+export const getCreditsFromLocalStorage = () =>
+  isBrowser ? localStorage.getItem("Credits") : null;
+export const setCreditsToLocalStorage = (planId: number) =>
+  isBrowser && localStorage.setItem("Credits", planId.toString());
+export const removeCreditsFromLocalStorage = () => {
+  isBrowser && localStorage.removeItem("Credits");
 };
