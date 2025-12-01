@@ -142,9 +142,9 @@ export interface PaymentPagination {
 export interface PaymentItem {
   id: number;
   userId: number;
-  user: any | null;
+  user: null;
   subscriptionId: number;
-  subscription: any | null;
+  subscription: null;
   amount: number;
   currency: string;
   provider: string;
