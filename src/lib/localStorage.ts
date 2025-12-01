@@ -43,6 +43,23 @@ export const getCreditsFromLocalStorage = () =>
   isBrowser ? localStorage.getItem("Credits") : null;
 export const setCreditsToLocalStorage = (planId: number) =>
   isBrowser && localStorage.setItem("Credits", planId.toString());
+export const decreaseCreditsFromLocalStorage = (amount: number = 1) => {
+  if (!isBrowser) return null;
+  const currentCredits = localStorage.getItem("Credits");
+  if (currentCredits === null) return null;
+  const credits = parseInt(currentCredits, 10);
+  const newCredits = Math.max(0, credits - amount);
+  localStorage.setItem("Credits", newCredits.toString());
+
+  // Thông báo cho toàn bộ app (Header, v.v...) biết credits đã thay đổi
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(
+      new CustomEvent("creditsUpdated", { detail: newCredits })
+    );
+  }
+
+  return newCredits;
+};
 export const removeCreditsFromLocalStorage = () => {
   isBrowser && localStorage.removeItem("Credits");
 };

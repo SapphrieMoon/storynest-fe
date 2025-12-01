@@ -1,14 +1,17 @@
 import {
   adminLogin,
   getDashboardStats,
+  getPaymentStats,
   getStoryStats,
   getSubscription,
 } from "@/services/admin.service";
 import {
   AdminLoginRequest,
   GetDashboardStatsResponse,
+  GetPaymentStatsResponse,
   GetStoryStatsResponse,
   GetSubscriptionStatsResponse,
+  PaymentFilter,
 } from "@/types/admin.type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -42,5 +45,17 @@ export const useDashboardStats = () => {
     queryKey: ["dashboard-stats"],
     queryFn: getDashboardStats,
     staleTime: 1000 * 60, // cache 1 phút
+  });
+};
+
+export const usePaymentStats = (
+  page: number,
+  pageSize: number,
+  filter: PaymentFilter = "total"
+) => {
+  return useQuery<GetPaymentStatsResponse>({
+    queryKey: ["payment-stats", page, pageSize, filter],
+    queryFn: () => getPaymentStats(page, pageSize, filter),
+    staleTime: 1000 * 30, // cache 30s cho admin
   });
 };

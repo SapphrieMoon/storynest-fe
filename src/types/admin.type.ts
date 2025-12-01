@@ -118,3 +118,39 @@ export interface DashboardStatsData {
   totalComments: number;
   totalSubscriptions: number;
 }
+
+// ====== FILTER TYPE ======
+export type PaymentFilter = "weekly" | "total";
+
+// ====== ROOT RESPONSE ======
+export interface GetPaymentStatsResponse {
+  status: number;
+  message: string;
+  data: PaymentPagination;
+}
+
+// ====== PAGINATION ======
+export interface PaymentPagination {
+  totalItems: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  items: PaymentItem[];
+}
+
+// ====== PAYMENT ITEM ======
+export interface PaymentItem {
+  id: number;
+  userId: number;
+  user: null;
+  subscriptionId: number;
+  subscription: null;
+  amount: number;
+  currency: string;
+  provider: string;
+  providerTXN: string;
+  status: number;
+  paidAt: string;
+  createdAt: string;
+  updatedAt: string;
+}

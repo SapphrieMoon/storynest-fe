@@ -33,7 +33,9 @@ export function Header() {
 
   const logoutMutation = useLogoutMutation();
   const { token, logout: authLogout } = useAuth();
-  const credits = getCreditsFromLocalStorage();
+  const [credits, setCredits] = useState<string | null>(
+    getCreditsFromLocalStorage()
+  );
   const plainId = getPlanIdFromLocalStorage();
 
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -53,6 +55,28 @@ export function Header() {
         avatarUrl: `https://cdn.storynest.io.vn/${avatar}`,
       });
     }
+
+    // Lắng nghe thay đổi credits (ví dụ khi tạo voice / image trừ credits)
+    const handleCreditsUpdated = (event: Event) => {
+      const customEvent = event as CustomEvent<number>;
+      setCredits(customEvent.detail.toString());
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener(
+        "creditsUpdated",
+        handleCreditsUpdated as EventListener
+      );
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener(
+          "creditsUpdated",
+          handleCreditsUpdated as EventListener
+        );
+      }
+    };
   }, []);
 
   const handleLogout = async () => {
