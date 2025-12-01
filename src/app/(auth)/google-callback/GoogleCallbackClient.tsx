@@ -15,6 +15,7 @@ export default function GoogleCallbackPage() {
     const avatar = searchParams.get("avatar");
     const userId = searchParams.get("userId");
     const credits = searchParams.get("credits");
+    const planId = searchParams.get("planId");
 
     if (!token) return;
 
@@ -30,6 +31,10 @@ export default function GoogleCallbackPage() {
     if (userId) {
       localStorage.setItem("userId", userId);
     }
+
+    if (planId) {
+      localStorage.setItem("planId", planId);
+    } else localStorage.setItem("planId", "1");
 
     // lưu credits
     if (credits) {
