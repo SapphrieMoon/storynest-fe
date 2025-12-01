@@ -22,7 +22,7 @@ const queryClient = new QueryClient({
 export default function AppProviders({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <NeatBackground /> */}
+      <NeatBackground />
       <AuthProvider>
         <SignalRProvider>
           <ThemeProvider
