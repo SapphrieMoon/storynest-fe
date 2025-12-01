@@ -8,6 +8,10 @@ import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import VoicePlayer from "@/components/VoicePlayer";
 import {
+  getCreditsFromLocalStorage,
+  decreaseCreditsFromLocalStorage,
+} from "@/lib/localStorage";
+import {
   useGenerateAudioMuation,
   useGenerateImageMuation,
 } from "@/queries/media.queries";
@@ -22,7 +26,7 @@ import {
 } from "@/types/story.type";
 import { Eye, ImageIcon, Mic, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 function CreateStoryAI() {
@@ -43,6 +47,14 @@ function CreateStoryAI() {
   const checkNLPMutation = useCheckNLPMutation();
   const [isLoading, setIsLoading] = useState(false);
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const [credits, setCredits] = useState<string | null>(
+    getCreditsFromLocalStorage()
+  );
+
+  // Update credits when component mounts or when credits change
+  useEffect(() => {
+    setCredits(getCreditsFromLocalStorage());
+  }, []);
 
   const handleToggle = (value: boolean) => {
     setIsAnonymous(value);
@@ -67,16 +79,34 @@ function CreateStoryAI() {
   };
 
   const handleGenerateVoice = async (id: string, content: string) => {
+    // Check credits before generating
+    const currentCredits = parseInt(credits || "0", 10);
+    if (currentCredits <= 0) {
+      toast.error("Bạn đã hết lượt tạo, vui lòng mua thêm!");
+      return;
+    }
+
     setGeneratingVoices((prev) => new Set(prev).add(id));
     try {
       const ok = await checkNLP(content);
-      if (!ok) return;
+      if (!ok) {
+        setGeneratingVoices((prev) => {
+          const next = new Set(prev);
+          next.delete(id);
+          return next;
+        });
+        return;
+      }
 
       const res = await generateVoiceMutation.mutateAsync(content);
       const audioUrl = res.data;
       setCards((prev) =>
         prev.map((c) => (c.id === id ? { ...c, audioUrl } : c))
       );
+
+      // Deduct credits after successful generation
+      const newCredits = decreaseCreditsFromLocalStorage(1);
+      setCredits(newCredits !== null ? newCredits.toString() : "0");
     } catch {
       toast.error("Đã có lỗi xảy ra khi tạo giọng nói!");
     } finally {
@@ -89,10 +119,24 @@ function CreateStoryAI() {
   };
 
   const handleGenerateMedia = async (id: string, content: string) => {
+    // Check credits before generating
+    const currentCredits = parseInt(credits || "0", 10);
+    if (currentCredits <= 0) {
+      toast.error("Bạn đã hết lượt tạo, vui lòng mua thêm!");
+      return;
+    }
+
     setGeneratingImages((prev) => new Set(prev).add(id));
     try {
       const ok = await checkNLP(content);
-      if (!ok) return;
+      if (!ok) {
+        setGeneratingImages((prev) => {
+          const next = new Set(prev);
+          next.delete(id);
+          return next;
+        });
+        return;
+      }
 
       const res = await generateMediaMutation.mutateAsync(content);
       console.log("res", res.data);
@@ -101,6 +145,10 @@ function CreateStoryAI() {
       setCards((prev) =>
         prev.map((c) => (c.id === id ? { ...c, mediaUrl: mediaUrl } : c))
       );
+
+      // Deduct credits after successful generation
+      const newCredits = decreaseCreditsFromLocalStorage(1);
+      setCredits(newCredits !== null ? newCredits.toString() : "0");
     } catch {
       toast.error("Đã có lỗi xảy ra khi tạo hình ảnh!");
     } finally {

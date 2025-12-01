@@ -12,7 +12,7 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { BarChart3, BookOpen, LogOut } from "lucide-react";
+import { BarChart3, BookOpen, LogOut, CreditCard } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -36,6 +36,11 @@ const items = [
     title: "Quản lý câu chuyện",
     url: "/manage/stories",
     icon: BookOpen,
+  },
+  {
+    title: "Quản lý thanh toán",
+    url: "/manage/payment",
+    icon: CreditCard,
   },
 ];
 

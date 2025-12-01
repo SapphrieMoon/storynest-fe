@@ -3,8 +3,10 @@ import {
   AdminLoginRequest,
   AdminLoginResponse,
   GetDashboardStatsResponse,
+  GetPaymentStatsResponse,
   GetStoryStatsResponse,
   GetSubscriptionStatsResponse,
+  PaymentFilter,
 } from "@/types/admin.type";
 
 export const adminLogin = async (
@@ -39,3 +41,19 @@ export const getDashboardStats =
     const response = await https.get("/api/Admin/dashboard");
     return response.data;
   };
+
+export const getPaymentStats = async (
+  page: number,
+  pageSize: number,
+  filter: PaymentFilter = "total"
+): Promise<GetPaymentStatsResponse> => {
+  const response = await https.get("/api/Admin/payment", {
+    params: {
+      page,
+      pageSize,
+      filter,
+    },
+  });
+
+  return response.data;
+};
