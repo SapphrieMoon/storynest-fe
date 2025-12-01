@@ -2,7 +2,9 @@ import https from "@/lib/axios";
 import {
   AdminLoginRequest,
   AdminLoginResponse,
+  GetDashboardStatsResponse,
   GetStoryStatsResponse,
+  GetSubscriptionStatsResponse,
 } from "@/types/admin.type";
 
 export const adminLogin = async (
@@ -25,3 +27,15 @@ export const getStoryStats = async (
 
   return response.data;
 };
+
+export const getSubscription =
+  async (): Promise<GetSubscriptionStatsResponse> => {
+    const response = await https.get("/api/Admin/subscription");
+    return response.data;
+  };
+
+export const getDashboardStats =
+  async (): Promise<GetDashboardStatsResponse> => {
+    const response = await https.get("/api/Admin/dashboard");
+    return response.data;
+  };
