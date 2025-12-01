@@ -26,6 +26,7 @@ import { useLoginMutation } from "@/queries/auth.queries";
 import GoogleLoginButton from "../google-callback/google-login-button";
 import {
   setAvatarToLocalStorage,
+  setCreditsToLocalStorage,
   setPlanIdToLocalStorage,
   setPlanNameFromLocalStorage,
 } from "@/lib/localStorage";
@@ -82,6 +83,7 @@ const LoginPage = () => {
       setAvatarToLocalStorage(response.data.avatarUrl);
       setPlanIdToLocalStorage(response.data.planId ?? 1);
       setPlanNameFromLocalStorage(response.data.planName ?? "");
+      setCreditsToLocalStorage(response.data.credits ?? 0);
 
       router.push("/home");
     } catch (err) {
