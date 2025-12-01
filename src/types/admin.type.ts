@@ -69,20 +69,12 @@ export interface StoryItem {
 }
 
 // ====== RELATED ENTITIES (rỗng nên khai báo cơ bản) ======
-export interface User {}
-
-export interface Media {}
-
-export interface CollectionStory {}
-
-export interface Comment {}
-
-export interface Like {}
-
-export interface StoryTag {}
-
-export interface StoryView {}
-
-export interface Report {}
-
-export interface SentimentAnalysis {}
+export type User = Record<string, unknown>;
+export type Media = Record<string, unknown>;
+export type CollectionStory = Record<string, unknown>;
+export type Comment = Record<string, unknown>;
+export type Like = Record<string, unknown>;
+export type StoryTag = Record<string, unknown>;
+export type StoryView = Record<string, unknown>;
+export type Report = Record<string, unknown>;
+export type SentimentAnalysis = Record<string, unknown>;
