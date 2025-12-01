@@ -15,6 +15,7 @@ export default function GoogleCallbackPage() {
     const avatar = params.get("avatar");
     const planId = params.get("planId");
     const planName = params.get("planName");
+    const credits = params.get("credits");
 
     if (token) {
       login(token);
@@ -33,6 +34,12 @@ export default function GoogleCallbackPage() {
         localStorage.setItem("planName", planName);
       } else {
         localStorage.setItem("planName", "null");
+      }
+
+      if (credits) {
+        localStorage.setItem("credits", credits);
+      } else {
+        localStorage.setItem("credits", "0");
       }
 
       router.push("/home");
