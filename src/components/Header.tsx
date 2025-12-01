@@ -19,6 +19,7 @@ import {
 import {
   getAvatarFromLocalStorage,
   getCreditsFromLocalStorage,
+  getPlanIdFromLocalStorage,
 } from "@/lib/localStorage";
 import { useAuth } from "@/context/AuthContext";
 import { useLogoutMutation } from "@/queries/auth.queries";
@@ -33,6 +34,7 @@ export function Header() {
   const logoutMutation = useLogoutMutation();
   const { token, logout: authLogout } = useAuth();
   const credits = getCreditsFromLocalStorage();
+  const plainId = getPlanIdFromLocalStorage();
 
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -60,6 +62,22 @@ export function Header() {
       window.location.href = "/login";
     } catch (error) {
       console.error("Logout failed:", error);
+    }
+  };
+
+  const getPlanName = (planId: number | string | null | undefined): string => {
+    const id = typeof planId === "string" ? parseInt(planId, 10) : planId;
+    switch (id) {
+      case 1:
+        return "Gói Mần Non";
+      case 2:
+        return "Gói Nở Hoa";
+      case 3:
+        return "Gói Thịnh Vượng";
+      case 4:
+        return "Gói Đồng Hành";
+      default:
+        return "Gói Thịnh Vượng"; // Default fallback
     }
   };
 
@@ -115,7 +133,7 @@ export function Header() {
               </DropdownMenuLabel>
               <DropdownMenuItem className="p-0 bg-transparent focus:bg-transparent">
                 <ElectricBorder className="flex items-center gap-2 px-3 py-2 rounded-md text-xs font-semibold tracking-wide text-white/90 border-transparent">
-                  <span className="text-bloom">Gói Thịnh Vượng</span>
+                  <span className="text-bloom">{getPlanName(plainId)}</span>
                 </ElectricBorder>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-white/10" />

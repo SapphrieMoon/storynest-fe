@@ -6,6 +6,7 @@ import { useCheckPaymentQuery } from "@/queries/payment.queries";
 import { Check, Download } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function PaymentSuccessClient() {
   const searchParams = useSearchParams();
@@ -16,6 +17,10 @@ export default function PaymentSuccessClient() {
   const { data: checkPayment, isLoading } = useCheckPaymentQuery(
     orderCode ? Number(orderCode) : 0
   );
+
+  useEffect(() => {
+    toast.warning("Thanh toán thành công, vui lòng đăng nhập lại để thấy xu!");
+  }, []);
 
   useEffect(() => {
     if (countdown <= 0) {

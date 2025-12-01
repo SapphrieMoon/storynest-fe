@@ -1,50 +1,45 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import StoryNestLoader from "@/components/story-nest-loader/StoryNestLoader";
 
 export default function GoogleCallbackPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { login } = useAuth();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    const avatar = params.get("avatar");
-    const planId = params.get("planId");
-    const planName = params.get("planName");
-    const credits = params.get("credits");
+    const token = searchParams.get("token");
+    const avatar = searchParams.get("avatar");
+    const userId = searchParams.get("userId");
+    const credits = searchParams.get("credits");
 
-    if (token) {
-      login(token);
+    if (!token) return;
 
-      if (avatar) {
-        localStorage.setItem("avatar", avatar);
-      }
+    // lưu token
+    login(token);
 
-      if (planId) {
-        localStorage.setItem("plainId", planId);
-      } else {
-        localStorage.setItem("planId", "null");
-      }
-
-      if (planName) {
-        localStorage.setItem("planName", planName);
-      } else {
-        localStorage.setItem("planName", "null");
-      }
-
-      if (credits) {
-        localStorage.setItem("credits", credits);
-      } else {
-        localStorage.setItem("credits", "0");
-      }
-
-      router.push("/home");
+    // lưu avatar (decode)
+    if (avatar) {
+      localStorage.setItem("avatar", decodeURIComponent(avatar));
     }
-  }, [login, router]);
+
+    // lưu userId
+    if (userId) {
+      localStorage.setItem("userId", userId);
+    }
+
+    // lưu credits
+    if (credits) {
+      localStorage.setItem("credits", credits);
+    } else {
+      localStorage.setItem("credits", "0");
+    }
+
+    router.replace("/home");
+  }, [login, router, searchParams]);
 
   return (
     <div className="mt-3">
