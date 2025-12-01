@@ -78,3 +78,43 @@ export type StoryTag = Record<string, unknown>;
 export type StoryView = Record<string, unknown>;
 export type Report = Record<string, unknown>;
 export type SentimentAnalysis = Record<string, unknown>;
+
+// ====== ROOT RESPONSE ======
+export interface GetSubscriptionStatsResponse {
+  status: number;
+  message: string;
+  data: SubscriptionStatsData;
+}
+
+// ====== DATA ======
+export interface SubscriptionStatsData {
+  totalSubscriptions: number;
+  activeSubscriptions: number;
+  totalRevenue: number;
+  totalFreemiumUsers: number;
+  totalPremiumUsers: number;
+  bloomPlan: SubscriptionPlanStats;
+  flourishPlan: SubscriptionPlanStats;
+  ensemblePlan: SubscriptionPlanStats;
+}
+
+// ====== PLAN ITEM ======
+export interface SubscriptionPlanStats {
+  planName: string;
+  userCount: number;
+}
+
+// ====== ROOT RESPONSE ======
+export interface GetDashboardStatsResponse {
+  status: number;
+  message: string;
+  data: DashboardStatsData;
+}
+
+// ====== DATA ======
+export interface DashboardStatsData {
+  totalUsers: number;
+  totalStories: number;
+  totalComments: number;
+  totalSubscriptions: number;
+}
