@@ -325,8 +325,10 @@ Open http://localhost:3000 with your browser to see the result.
 
 Create a .env.local file in the root directory:
 
-```env
+```bash
 NEXT_PUBLIC_API_URL=your_backend_api_url
+```
+
 Note: The backend service is maintained in a separate repository.
 
 ### 📈 What I Learned
