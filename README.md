@@ -50,6 +50,7 @@ https://drive.google.com/file/d/1_6xgTiictEM8jzR6oXjrjL0GbYUjMQkJ/view
 - **Framework**: Next.js (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
+- **Server State Management**: TanStack Query (React Query)
 - **State Management**: React Hooks
 - **API Communication**: REST API
 - **Deployment**: Vercel
@@ -334,6 +335,16 @@ NEXT_PUBLIC_API_URL=your_backend_api_url
 ```
 
 Note: The backend service is maintained in a separate repository.
+
+---
+
+## 🔗 Related Repositories
+
+Backend Repository:
+👉 https://github.com/lagux-coding/storynest-be.git
+
+This project follows a frontend–backend separated architecture,
+where the frontend consumes RESTful APIs provided by the backend service.
 
 ---
 
