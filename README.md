@@ -309,7 +309,7 @@ pnpm install
 
 ---
 
-### Run the Development Server
+## Run the Development Server
 
 ```bash
 pnpm dev
@@ -337,7 +337,7 @@ Note: The backend service is maintained in a separate repository.
 
 ---
 
-### 📈 What I Learned
+## 📈 What I Learned
 
 Designing scalable frontend architecture with Next.js App Router
 
@@ -351,7 +351,7 @@ Writing clean, maintainable, and documented code
 
 ---
 
-### 👨‍💻 Author
+## 👨‍💻 Author
 
 SapphireMoon
 
@@ -359,11 +359,10 @@ GitHub: https://github.com/SapphrieMoon
 
 Project Repository: https://github.com/SapphrieMoon/storynest-fe
 
-### 📄 License
-
 ---
+
+## 📄 License
 
 This project is for educational and portfolio purposes.
 
 <p align="center">Made with ❤️ using Next.js</p>
-```
