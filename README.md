@@ -301,13 +301,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with
 
 Clone the repository and install dependencies:
 
-````bash
+```bash
 git clone https://github.com/SapphrieMoon/storynest-fe.git
 cd storynest-fe
 pnpm install
-Run the Development Server
-bash
-Copy code
+```
+
+### Run the Development Server
+
+```bash
 pnpm dev
 # or
 npm run dev
@@ -315,17 +317,20 @@ npm run dev
 yarn dev
 # or
 bun dev
+```
+
 Open http://localhost:3000 with your browser to see the result.
 
-Environment Variables
+### Environment Variables
+
 Create a .env.local file in the root directory:
 
-env
-Copy code
+```env
 NEXT_PUBLIC_API_URL=your_backend_api_url
 Note: The backend service is maintained in a separate repository.
 
-📈 What I Learned
+### 📈 What I Learned
+
 Designing scalable frontend architecture with Next.js App Router
 
 Structuring large React applications
@@ -336,15 +341,17 @@ Deploying and maintaining a production-ready web application
 
 Writing clean, maintainable, and documented code
 
-👨‍💻 Author
+### 👨‍💻 Author
+
 SapphireMoon
 
 GitHub: https://github.com/SapphrieMoon
 
 Project Repository: https://github.com/SapphrieMoon/storynest-fe
 
-📄 License
+### 📄 License
+
 This project is for educational and portfolio purposes.
 
-<p align="center">Made with ❤️ using Next.js</p> ```
-````
+<p align="center">Made with ❤️ using Next.js</p>
+```
