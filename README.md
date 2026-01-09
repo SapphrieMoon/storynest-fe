@@ -307,6 +307,8 @@ cd storynest-fe
 pnpm install
 ```
 
+---
+
 ### Run the Development Server
 
 ```bash
@@ -321,6 +323,8 @@ bun dev
 
 Open http://localhost:3000 with your browser to see the result.
 
+---
+
 ### Environment Variables
 
 Create a .env.local file in the root directory:
@@ -330,6 +334,8 @@ NEXT_PUBLIC_API_URL=your_backend_api_url
 ```
 
 Note: The backend service is maintained in a separate repository.
+
+---
 
 ### 📈 What I Learned
 
@@ -343,6 +349,8 @@ Deploying and maintaining a production-ready web application
 
 Writing clean, maintainable, and documented code
 
+---
+
 ### 👨‍💻 Author
 
 SapphireMoon
@@ -352,6 +360,8 @@ GitHub: https://github.com/SapphrieMoon
 Project Repository: https://github.com/SapphrieMoon/storynest-fe
 
 ### 📄 License
+
+---
 
 This project is for educational and portfolio purposes.
 
